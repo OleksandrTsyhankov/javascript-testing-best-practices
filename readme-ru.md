@@ -170,7 +170,7 @@ describe('Products Service', function() {
 
 <br/>
 
-### :clap: Делай правильно Example: Тест структурирован согласно AAA паттерну
+### :clap: Делай правильно Пример: Тест структурирован согласно AAA паттерну
 
 ![](https://img.shields.io/badge/🔧%20Example%20using%20Jest-blue.svg "Пример с  Jest") ![](https://img.shields.io/badge/🔧%20Example%20using%20Mocha-blue.svg "Пример с Mocha")
 
@@ -192,7 +192,7 @@ describe("Customer classifier", () => {
 
 <br/>
 
-### :thumbsdown: Пример анти-паттерна: Нет разделения, один блок, сложнее разобрать
+### :thumbsdown: Анти-паттерн Пример: Нет разделения, один блок, сложнее разобрать
 
 ```javascript
 test("Should be classified as premium", () => {
@@ -207,20 +207,21 @@ test("Should be classified as premium", () => {
 
 <br/><br/>
 
-## ⚪ ️1.3 Describe expectations in a product language: use BDD-style assertions
+## ⚪ ️1.3 Опиши ожидания на языке продукта: используй утверждения в стиле BDD
 
-:white_check_mark: **Do:** Coding your tests in a declarative-style allows the reader to get the grab instantly without spending even a single brain-CPU cycle. When you write imperative code that is packed with conditional logic, the reader is forced to exert more brain-CPU cycles. In that case, code the expectation in a human-like language, declarative BDD style using `expect` or `should` and not using custom code. If Chai & Jest doesn't include the desired assertion and it’s highly repeatable, consider [extending Jest matcher (Jest)](https://jestjs.io/docs/en/expect#expectextendmatchers) or writing a [custom Chai plugin](https://www.chaijs.com/guide/plugins/)
-<br/>
-
-❌ **Otherwise:** The team will write less tests and decorate the annoying ones with .skip()
+:white_check_mark: **Делай:** Тесты написанные в декларативном стиле позволяют читающему понять что происходит, без нагрузки на свой мозговой процессор. Если твои тесты написаны в императивном стиле, наполнены условной логикой, то читатель вынужден нагружать свой мозг. Поэтому используй язык, похожий на человеческую речь, декларативный BDD стиль, использующий такие слова как 'expect' или 'should' и не используй дополнительный код. Если Chai & Jest не содержат необходимой проверки и она часто повторяется, лучше используй [расширение для Jest](https://jestjs.io/docs/en/expect#expectextendmatchers) или напиши [плагин для Chai](https://www.chaijs.com/guide/plugins/)
 
 <br/>
 
-<details><summary>✏ <b>Code Examples</b></summary><br/>
+❌ **Иначе:** Команда будет писать меньше тестов и пропускать надоедливые при помощи .skip()
 
-![](https://img.shields.io/badge/🔧%20Example%20using%20Mocha-blue.svg "Examples with Mocha & Chai") ![](https://img.shields.io/badge/🔧%20Example%20using%20Jest-blue.svg "Examples with Jest")
+<br/>
 
-### :thumbsdown: Anti-Pattern Example: The reader must skim through not so short, and imperative code just to get the test story
+<details><summary>✏ <b>Пример кода</b></summary><br/>
+
+![](https://img.shields.io/badge/🔧%20Example%20using%20Mocha-blue.svg "Примеры с Mocha & Chai") ![](https://img.shields.io/badge/🔧%20Example%20using%20Jest-blue.svg "Примеры с Jest")
+
+### :thumbsdown: Анти-паттерн Пример: Читатель должен пройтись по всему немаленкому куску императивного кода, просто чтобы понять что это за тест
 
 ```javascript
 test("When asking for an admin, ensure only ordered admins in results", () => {
@@ -250,7 +251,7 @@ test("When asking for an admin, ensure only ordered admins in results", () => {
 
 <br/>
 
-### :clap: Doing It Right Example: Skimming through the following declarative test is a breeze
+### :clap: Делай правильно Пример: Легко читаемый декларативный тест
 
 ```javascript
 it("When asking for an admin, ensure only ordered admins in results", () => {
@@ -267,21 +268,21 @@ it("When asking for an admin, ensure only ordered admins in results", () => {
 
 <br/><br/>
 
-## ⚪ ️ 1.4 Stick to black-box testing: Test only public methods
+## ⚪ ️ 1.4 Придерживайся тестирования с черной коробкой (black-box testing): Пиши тесты только для публичных методов
 
-:white_check_mark: **Do:** Testing the internals brings huge overhead for almost nothing. If your code/API delivers the right results, should you really invest your next 3 hours in testing HOW it worked internally and then maintain these fragile tests? Whenever a public behavior is checked, the private implementation is also implicitly tested and your tests will break only if there is a certain problem (e.g. wrong output). This approach is also referred to as `behavioral testing`. On the other side, should you test the internals (white box approach) — your focus shifts from planning the component outcome to nitty-gritty details and your test might break because of minor code refactors although the results are fine - this dramatically increases the maintenance burden
+:white_check_mark: **Делай:** Тестирование внутренних методов принесет больше проблем, чем пользы. Если твой код/API возвращает правильный результат, действительно ли тебе нужно потратить следующие три часа тестируя КАК он работает изнутри, а затем еще и поддерживать эти хрупкие тесты? Всякий раз, когда проверяется публичная часть, неявно проверяется и приватная, и тесты остановятся, только если есть определенная проблема (например, неправильный вывод). Такой подход также назвают `поведенческое тестирование(behavioral testing)`. С другой стороны, если тестировать приватные методы(тестирование с белой коробкой) - твое внимание будет смещено с планирования выводных данных в сторону мелких внутренних деталей и твои тесты могут сломаться от любого рефакторинга, несмотря на то, что итоговый результат будет правильный - это резко увеличивает затраты на техническое обслуживание.
 <br/>
 
-❌ **Otherwise:** Your tests behave like the [boy who cried wolf](https://en.wikipedia.org/wiki/The_Boy_Who_Cried_Wolf): shouting false-positive cries (e.g., A test fails because a private variable name was changed). Unsurprisingly, people will soon start to ignore the CI notifications until someday, a real bug gets ignored…
+❌ **Иначе:** Твои тесты ведут себя как [мальчик, который кричал волки](https://ru.wikipedia.org/wiki/%D0%9C%D0%B0%D0%BB%D1%8C%D1%87%D0%B8%D0%BA,_%D0%BA%D0%BE%D1%82%D0%BE%D1%80%D1%8B%D0%B9_%D0%BA%D1%80%D0%B8%D1%87%D0%B0%D0%BB:_%C2%AB%D0%92%D0%BE%D0%BB%D0%BA!%C2%BB): постоянно будут ложные срабатывания(например тест провален, потому что сменили имя приватной переменной). Неудивительно, что скоро все начнут игнорировать сообщения от CI, пока в один день не будет проигнорирован настоящий баг...
 
 <br/>
-<details><summary>✏ <b>Code Examples</b></summary>
+<details><summary>✏ <b>Пример кода</b></summary>
 
 <br/>
 
-### :thumbsdown: Anti-Pattern Example: A test case is testing the internals for no good reason
+### :thumbsdown: Анти-паттерн Пример: Тестирование внутренних компонентов без особой причины
 
-![](https://img.shields.io/badge/🔧%20Example%20using%20Mocha-blue.svg "Examples with Mocha & Chai")
+![](https://img.shields.io/badge/🔧%20Example%20using%20Mocha-blue.svg "Примеры с  Mocha & Chai")
 
 ```javascript
 class ProductService {
