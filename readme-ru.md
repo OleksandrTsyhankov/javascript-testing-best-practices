@@ -330,7 +330,7 @@ it("White-box test: When the internal methods get 0 vat, it return 0 response", 
 
 ![](https://img.shields.io/badge/🔧%20Example%20using%20Sinon-blue.svg "Примеры с Sinon")
 
-javascript
+```javascript
 it("When a valid product is about to be deleted, ensure data access DAL was called once, with the right product and right config", async () => {
   //Assume we already added a product
   const dataAccessMock = sinon.mock(DAL);
@@ -342,11 +342,12 @@ it("When a valid product is about to be deleted, ensure data access DAL was call
   new ProductService().deletePrice(theProductWeJustAdded);
   dataAccessMock.verify();
 });
+```
 <br/>
 
 ### 👏Делай правильно Пример: Шпион сделан для тестирования требований, но неизбежно затрагивает и внутренние методы
 
-javascript
+```javascript
 it("When a valid product is about to be deleted, ensure an email is sent", async () => {
   //Assume we already added here a product
   const spy = sinon.spy(Emailer.prototype, "sendEmail");
@@ -354,6 +355,7 @@ it("When a valid product is about to be deleted, ensure an email is sent", async
   //hmmm OK: we deal with internals? Yes, but as a side effect of testing the requirements (sending an email)
   expect(spy.calledOnce).to.be.true;
 });
+```
 </details>
 
 <br/><br/>
@@ -380,7 +382,7 @@ it("When a valid product is about to be deleted, ensure an email is sent", async
 
 ![](https://img.shields.io/badge/🔧%20Example%20using%20Jest-blue.svg "Примеры с Jest")
 
-javascript
+```javascript
 const addProduct = (name, price) => {
   const productNameRegexNoSpace = /^\S*$/; //no white-space allowed
 
@@ -397,7 +399,24 @@ test("Wrong: When adding new product with valid properties, get successful confi
   //Positive-false: the operation succeeded because we never tried with long
   //product name including spaces
 });
+```
 <br/>
+
+### :clap: Делай правильно Пример: Случайный реалистичный ввод
+
+```javascript
+it("Better: When adding new valid product, get successful confirmation", async () => {
+  const addProductResult = addProduct(faker.commerce.productName(), faker.random.number());
+  //Generated random input: {'Sleek Cotton Computer',  85481}
+  expect(addProductResult).to.be.true;
+  //Test failed, the random input triggered some path we never planned for.
+  //We discovered a bug early!
+});
+```
+
+</details>
+
+<br/><br/>
 
 ## ⚪ ️ 1.7 Тестируй большое количество комбинаций ввода используя тестирование на основе свойств(property-based testing)
 
