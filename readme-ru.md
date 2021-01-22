@@ -728,83 +728,82 @@ test("Then there should not be a new transfer record", () => {});
 
 <br/><br/>
 
-# Section 2️⃣: Backend Testing
+# Часть 2️⃣: Backend
 
-## ⚪ ️2.1 Enrich your testing portfolio: Look beyond unit tests and the pyramid
+## ⚪ ️2.1 Расширь свои методики тестирования: посмотри что еще есть кроме юнит тестов и пирамиды
 
-:white_check_mark: **Do:** The [testing pyramid](https://martinfowler.com/bliki/TestPyramid.html), though 10> years old, is a great and relevant model that suggests three testing types and influences most developers’ testing strategy. At the same time, more than a handful of shiny new testing techniques emerged and are hiding in the shadows of the testing pyramid. Given all the dramatic changes that we’ve seen in the recent 10 years (Microservices, cloud, serverless), is it even possible that one quite-old model will suit *all* types of applications? shouldn’t the testing world consider welcoming new testing techniques?
+:white_check_mark: **Делай:** [Пирамида тестирования](https://martinfowler.com/bliki/TestPyramid.html) за более чем десять лет, показала себя отличной моделью, которая предлагает три типа тестирования и которая повлияла на способ написания тестов большинства разработчиков. The В то же время много других техник не могут засиять в полную силу, так как они скрыты в тени этой пирамиды. Учитывая всё, что появилось за последние десять лет(микросервисы, облачные технологии, serverless архитектура), неужели одной достаточно строй модели достаточно чтобы покрыть *все* виды приложений? Не следует ли принять в мир тестирования новые техники?
 
-Don’t get me wrong, in 2019 the testing pyramid, TDD and unit tests are still a powerful technique and are probably the best match for many applications. Only like any other model, despite its usefulness, [it must be wrong sometimes](https://en.wikipedia.org/wiki/All_models_are_wrong). For example, consider an IoT application that ingests many events into a message-bus like Kafka/RabbitMQ, which then flow into some data-warehouse and are eventually queried by some analytics UI. Should we really spend 50% of our testing budget on writing unit tests for an application that is integration-centric and has almost no logic? As the diversity of application types increase (bots, crypto, Alexa-skills) greater are the chances to find scenarios where the testing pyramid is not the best match.
+Не поймите меня неправильно, в 2019 году пирамида тестирования, TDD и юнит тесты все еще отличные техники и наверно лучший вариант для многих приложений. Только вот, несмотря на всю их пользу, [иногда они тоже неправильны](https://en.wikipedia.org/wiki/All_models_are_wrong).Возьмем например приложение из мира IoT, которое загружает большое количество событий в броккер сообщений типа  Kafka/RabbitMQ, затем попадют в какое-нибудь хранилище данных, откуда запрашиваются для вывода в пользовательском интерфейсе для аналитики. Мы действительно должны потратить 50% бюджета наших тестов, чтобы написать юнит тесты для приложения, которое ориентировано на интеграцию и почти не имеет логики? И чем больше приложений разных типов будет появляться(боты, криптовалюта, голосовые помошники типа Alexa), тем больше шансов получить сценарий, когда тестировочная пирамида уже не будет лучшим вариантом.
 
-It’s time to enrich your testing portfolio and become familiar with more testing types (the next bullets suggest few ideas), mind models like the testing pyramid but also match testing types to real-world problems that you’re facing (‘Hey, our API is broken, let’s write consumer-driven contract testing!’), diversify your tests like an investor that build a portfolio based on risk analysis — assess where problems might arise and match some prevention measures to mitigate those potential risks
+Пришло время расширить свой инструментарий и познакомится с новыми типами тестирования(следующий пункт как раз об этом), с моделями похожими на пирамиду, но включающие в себя тесты для проблем из рельного мира(Хэй, наше API поломалось, давайте напишем тесты контрактов, основаных на потребителях(consumer-driven contract)!), разделить свои тесты как инвестор, который собирает портфель на основе анализа рисков - оценивая, где могут возникнуть проблемы и принимая меры для снижения потенциальных рисков.
 
-A word of caution: the TDD argument in the software world takes a typical false-dichotomy face, some preach to use it everywhere, others think it’s the devil. Everyone who speaks in absolutes is wrong :]
-
-<br/>
-
-❌ **Otherwise:** You’re going to miss some tools with amazing ROI, some like Fuzz, lint, and mutation can provide value in 10 minutes
+Небольшое предупреждение: Отношение к TDD в мире разработки типично-двойственное, одни проповедуют использовать его повсюду, другие видят в нем Дьявола. Ошибаются те, кто возводят все в абсолют :] 
 
 <br/>
 
-<details><summary>✏ <b>Code Examples</b></summary>
+❌ **Иначе:** Ты упустишь множество инструментов и техник вроде фаззинга, линтеров или мутационного тестирования, которые могут принести пользу за 10 минут.
 
 <br/>
 
-### :clap: Doing It Right Example: Cindy Sridharan suggests a rich testing portfolio in her amazing post ‘Testing Microservices — the same way’
-
-![alt text](assets/bp-12-rich-testing.jpeg "Cindy Sridharan suggests a rich testing portfolio in her amazing post ‘Testing Microservices — the sane way’")
-
-<strong class="markup--strong markup--p-strong">☺️Example: </strong><a href="https://www.youtube.com/watch?v=-2zP494wdUY&amp;feature=youtube" data-href="https://www.youtube.com/watch?v=-2zP494wdUY&amp;feature=youtu.be" class="markup--anchor markup--p-anchor" rel="nofollow noopener" target="_blank">[YouTube: “Beyond Unit Tests: 5 Shiny Node.JS Test Types (2018)” (Yoni Goldberg)](https://www.youtube.com/watch?v=-2zP494wdUY&feature=youtu.be)</a>
+<details><summary>✏ <b>Пример кода</b></summary>
 
 <br/>
 
-![alt text](assets/bp-12-Yoni-Goldberg-Testing.jpeg "A test name that constitutes 3 parts")
+### :clap: Делай правильно Пример: Cindy Sridharan предлагает богатый выбор для тестирования в ее потрясном посте 'Testing Microservices — the same way'
+
+![alt text](assets/bp-12-rich-testing.jpeg Cindy Sridharan предлагает богатый выбор для тестирования в ее потрясном посте 'Testing Microservices — the same way'")
+
+<strong class="markup--strong markup--p-strong">Пример: </strong><a href="https://www.youtube.com/watch?v=-2zP494wdUY&amp;feature=youtube" data-href="https://www.youtube.com/watch?v=-2zP494wdUY&amp;feature=youtu.be" class="markup--anchor markup--p-anchor" rel="nofollow noopener" target="_blank">[YouTube: “Beyond Unit Tests: 5 Shiny Node.JS Test Types (2018)” (Yoni Goldberg)](https://www.youtube.com/watch?v=-2zP494wdUY&feature=youtu.be)</a>
+
+<br/>
+
+![alt text](assets/bp-12-Yoni-Goldberg-Testing.jpeg "Имя теста состоит из трех частей")
 
 </details>
 
 <br/><br/>
 
-## ⚪ ️2.2 Component testing might be your best affair
+## ⚪ ️2.2 Компонентное тестирование может быть твоим лучшим занятием 
 
-:white_check_mark: **Do:** Each unit test covers a tiny portion of the application and it’s expensive to cover the whole, whereas end-to-end testing easily covers a lot of ground but is flaky and slower, why not apply a balanced approach and write tests that are bigger than unit tests but smaller than end-to-end testing? Component testing is the unsung song of the testing world — they provide the best from both worlds: reasonable performance and a possibility to apply TDD patterns + realistic and great coverage.
+:white_check_mark: **Делай:** Каждый юнит тест покрывает лишь малую часть приложения и очень дорого покрыть ими всё, а e2e тестирование легко покрывает большие части, но оно многослойное и медленное. Так почему бы выбрать сбалансированный подход и написать тесты, которые больше юнитов, но меньше e2e? Компонентное тестирование это невоспетая песня мира тестов - оно обеспечивает лучшее с двух миров: адекватную производительность и возможность применять паттерны TDD + отличное реалистичное покрытие.
 
-Component tests focus on the Microservice ‘unit’, they work against the API, don’t mock anything which belongs to the Microservice itself (e.g. real DB, or at least the in-memory version of that DB) but stub anything that is external like calls to other Microservices. By doing so, we test what we deploy, approach the app from outwards to inwards and gain great confidence in a reasonable amount of time.
+Компонентное тестирование сосредоточено на микросервисном "юните", такие тесты работают вместо API, не используют моки для вещей, которые используются внутри микросервиса(например реальные записи БД или хотя бы их копии из памяти), но создают заглушких для всех внешних вызовов. Таким образом мы тестируем то, что будет размещено, сближаем внутреннюю и внешнюю часть приложения и получаем увернность в результатах за разумные сроки.
 <br/>
 
-❌ **Otherwise:** You may spend long days on writing unit tests to find out that you got only 20% system coverage
-
-<br/>
-
-<details><summary>✏ <b>Code Examples</b></summary>
+❌ **Иначе:** Ты будешь писать юнит тесты в течении многих дней, чтобы потом выяснить, что у тебя есть только 20% покрытия
 
 <br/>
 
-### :clap: Doing It Right Example: Supertest allows approaching Express API in-process (fast and cover many layers)
+<details><summary>✏ <b>Пример кода</b></summary>
 
-![](https://img.shields.io/badge/🔧%20Example%20using%20Mocha-blue.svg "Examples with Mocha")
+<br/>
 
-![alt text](assets/bp-13-component-test-yoni-goldberg.png " [Supertest](https://www.npmjs.com/package/supertest) allows approaching Express API in-process (fast and cover many layers)")
+### :clap: Делай правильно Пример: Supertest позволяет приблизиться к Express API в процессе (быстрый и покрывает много слоев)
+
+![](https://img.shields.io/badge/🔧%20Example%20using%20Mocha-blue.svg "Примеры с Mocha")
+
+![alt text](assets/bp-13-component-test-yoni-goldberg.png "[Supertest](https://www.npmjs.com/package/supertest) позволяет приблизиться к Express API в процессе (быстрый и покрывает много слоев)")
 
 </details>
 
 <br/><br/>
 
-## ⚪ ️2.3 Ensure new releases don’t break the API using contract tests
+## ⚪️ 2.3 Убедись, что новые релизы не поломают API - используй контрактное тестирование
 
-:white_check_mark: **Do:** So your Microservice has multiple clients, and you run multiple versions of the service for compatibility reasons (keeping everyone happy). Then you change some field and ‘boom!’, some important client who relies on this field is angry. This is the Catch-22 of the integration world: It’s very challenging for the server side to consider all the multiple client expectations — On the other hand, the clients can’t perform any testing because the server controls the release dates. [Consumer-driven contracts and the framework PACT](https://docs.pact.io/) were born to formalize this process with a very disruptive approach — not the server defines the test plan of itself rather the client defines the tests of the… server! PACT can record the client expectation and put in a shared location, “broker”, so the server can pull the expectations and run on every build using PACT library to detect broken contracts — a client expectation that is not met. By doing so, all the server-client API mismatches are caught early during build/CI and might save you a great deal of frustration
+✅ **Делай:** Значит у твоих микросервисисов много клиентов и у тебя есть разные версии для поддержания совместимости(чтобы все были счастливы). И вот, ты меняешь какое-нибудь поле и "бум", важный клиент, который использовал это поле теперь зол. Это Уловка-22 из мира интеграций: Очень сложно со стороны сервера учесть все ожидания клиентов, а с другой стороны на клиенте нельзя проводить тестирование, так как сервер контролирует даты релизов. [Контракты, ориентированные на потребителя(consumer-driven contracts) и фреймворк PACT](https://docs.pact.io/) былы созданы для формализации этого процесса с неожиданным подходом - не сервер определяет для себя план тестирования, а клиент определяет тесты для... сервера! PACT может записывать ожидания клиента и помещать их а отдельную область - "брокера", чтобы сервер мог взять эти ожидания, запустить каждую сборку с библиотеками PACT и увидеть, какие из контрактов сломались - не соответствуют ожиданиям клиента. В результате все несоответствия между клиент-серверным API будут отловлены заранее в процессе сборки/CI, что избавляет от лишней головной боли.
 <br/>
 
-❌ **Otherwise:** The alternatives are exhausting manual testing or deployment fear
+❌ **Иначе:** Альтернативы - утомительное ручное тестирование или страх перед деплоем
+<br/>
+
+<details><summary>✏️ <b>Пример кода</b></summary>
 
 <br/>
 
-<details><summary>✏ <b>Code Examples</b></summary>
+### 👏 Делай правильно Пример:
 
-<br/>
-
-### :clap: Doing It Right Example:
-
-![](https://img.shields.io/badge/🔧%20Example%20using%20PACT-blue.svg "Examples with PACT")
+![](https://img.shields.io/badge/🔧%20Example%20using%20PACT-blue.svg "Примеры с PACT")
 
 ![alt text](assets/bp-14-testing-best-practices-contract-flow.png)
 
@@ -812,22 +811,23 @@ Component tests focus on the Microservice ‘unit’, they work against the API,
 
 <br/><br/>
 
-## ⚪ ️ 2.4 Test your middlewares in isolation
+## ⚪️  2.4 Тестируй middleware отдельно
 
-:white_check_mark: **Do:** Many avoid Middleware testing because they represent a small portion of the system and require a live Express server. Both reasons are wrong — Middlewares are small but affect all or most of the requests and can be tested easily as pure functions that get {req,res} JS objects. To test a middleware function one should just invoke it and spy ([using Sinon for example](https://www.npmjs.com/package/sinon)) on the interaction with the {req,res} objects to ensure the function performed the right action. The library [node-mock-http](https://www.npmjs.com/package/node-mocks-http) takes it even further and factors the {req,res} objects along with spying on their behavior. For example, it can assert whether the http status that was set on the res object matches the expectation (See example below)
-<br/>
-
-❌ **Otherwise:** A bug in Express middleware === a bug in all or most requests
+✅ **Делай:** Многие не тестируют middleware, потому что они представляют лишь малую часть системы и требуют работающего Express сервера. Обе причины неправильные - middlewares небольшие, но через них проходят почти все запросы и их легко тестировать как чистые функции, передавая объект {req, res}. Для тестирования нужно просто вызвать такую функцию, проследить ([используя например Sinon](https://www.npmjs.com/package/sinon) за взаимодействием с {req, res} и убедиться, что она выполняет правильные действия.  Библиотека [node-mock-http](https://www.npmjs.com/package/node-mocks-http) идет еще дальше и учитывает объекты {req, res}, а также отслеживает их поведение. Например, она может сравнить статус http у объекта res с ожидаемым (пример ниже)
 
 <br/>
 
-<details><summary>✏ <b>Code Examples</b></summary>
+❌ **Иначе:** Баг в Express middleware === баг во всех или почти во всех запросах
 
 <br/>
 
-### :clap:Doing It Right Example: Testing middleware in isolation without issuing network calls and waking-up the entire Express machine
+<details><summary>✏️ <b>Пример кода</b></summary>
 
-![](https://img.shields.io/badge/🔧%20Example%20using%20Jest-blue.svg "Examples with Jest")
+<br/>
+
+### 👏Делай правильно Пример: Тестирование middleware изолированно, не используя сетевых вызовов или запуска всей машины с Express
+
+![](https://img.shields.io/badge/🔧%20Example%20using%20Jest-blue.svg "Примеры с Jest")
 
 ```javascript
 //the middleware we want to test
@@ -852,107 +852,52 @@ test("A request without authentication header, should return http status 403", (
 
 <br/><br/>
 
-## ⚪ ️2.5 Measure and refactor using static analysis tools
+## ⚪️ 2.5 Проверяй и проводи рефакторинг, используя статические анализаторы кода 
 
-:white_check_mark: **Do:** Using static analysis tools helps by giving objective ways to improve code quality and keep your code maintainable. You can add static analysis tools to your CI build to abort when it finds code smells. Its main selling points over plain linting are the ability to inspect quality in the context of multiple files (e.g. detect duplications), perform advanced analysis (e.g. code complexity) and follow the history and progress of code issues. Two examples of tools you can use are [SonarQube](https://www.sonarqube.org/) (4,900+ [stars](https://github.com/SonarSource/sonarqube)) and [Code Climate](https://codeclimate.com/) (2,000+ [stars](https://github.com/codeclimate/codeclimate))
+✅ **Делай:** Использование статических анализаторов позволяет обнаружить способы улучшить качество кода и сохранить его поддерживаемым. Ты можешь добавить такой инструмент к сборке CI, чтобы сборка останавливалась, если анализатор обнаружит "плохой" код. Основные преимущества таких анализаторов над линтерами в том, что они могут проверять качество в контексте нескольких файлов(например для обнаружения дублирования), выполнять продвинутый анализ(например сложности кода) и следить за историей и изменениями в пробемном коде. Два примера таких инструментов это [SonarQube](https://www.sonarqube.org/) (4,900+ [звёзд](https://github.com/SonarSource/sonarqube)) и [Code Climate](https://codeclimate.com/) (2,000+ [звёзд](https://github.com/codeclimate/codeclimate))
 
-Credit: <a href="https://github.com/TheHollidayInn" data-href="https://github.com/TheHollidayInn" class="markup--anchor markup--p-anchor" rel="noopener nofollow" target="_blank">[Keith Holliday](https://github.com/TheHollidayInn)</a>
-
-<br/>
-
-❌ **Otherwise:** With poor code quality, bugs and performance will always be an issue that no shiny new library or state of the art features can fix
+Автор: <a href="https://github.com/TheHollidayInn" data-href="https://github.com/TheHollidayInn" class="markup--anchor markup--p-anchor" rel="noopener nofollow" target="_blank">[Keith Holliday](https://github.com/TheHollidayInn)</a>
 
 <br/>
 
-<details><summary>✏ <b>Code Examples</b></summary>
+❌ **Иначе:** При низком качестве кода, баги и производительность всегда будут проблемой, и никакие новые блестящие библиотеки или современные функции этого не исправит.
 
 <br/>
 
-### :clap: Doing It Right Example: CodeClimate, a commercial tool that can identify complex methods:
+<details><summary>✏️ <b>Пример кода</b></summary>
 
-![](https://img.shields.io/badge/🔧%20Example%20using%20Code%20Climate-blue.svg "Examples with CodeClimate")
+<br/>
 
-![alt text](assets/bp-16-yoni-goldberg-quality.png "CodeClimate, a commercial tool that can identify complex methods:")
+### 👏  Делай правильно Пример: CodeClimate, коммерческий инструмент, который может опрелять сложные методы: 
+
+![](https://img.shields.io/badge/🔧%20Example%20using%20Code%20Climate-blue.svg "Пример с CodeClimate")
+
+![alt text](assets/bp-16-yoni-goldberg-quality.png "CodeClimate, коммерческий инструмент, который может опрелять сложные методы:")
 
 </details>
 
 <br/><br/>
 
-## ⚪ ️ 2.6 Check your readiness for Node-related chaos
+## ⚪️  2.6 Проверь свою готовность к хаосу Node.js
 
-:white_check_mark: **Do:** Weirdly, most software testings are about logic & data only, but some of the worst things that happen (and are really hard to mitigate) are infrastructural issues. For example, did you ever test what happens when your process memory is overloaded, or when the server/process dies, or does your monitoring system realizes when the API becomes 50% slower?. To test and mitigate these type of bad things — [Chaos engineering](https://principlesofchaos.org/) was born by Netflix. It aims to provide awareness, frameworks and tools for testing our app resiliency for chaotic issues. For example, one of its famous tools, [the chaos monkey](https://github.com/Netflix/chaosmonkey), randomly kills servers to ensure that our service can still serve users and not relying on a single server (there is also a Kubernetes version, [kube-monkey](https://github.com/asobti/kube-monkey), that kills pods). All these tools work on the hosting/platform level, but what if you wish to test and generate pure Node chaos like check how your Node process copes with uncaught errors, unhandled promise rejection, v8 memory overloaded with the max allowed of 1.7GB or whether your UX remains satisfactory when the event loop gets blocked often? to address this I’ve written, [node-chaos](https://github.com/i0natan/node-chaos-monkey) (alpha) which provides all sort of Node-related chaotic acts
+✅ **Делай:** Как ни странно, большинство тестов для программ проверяют логику и данные, но худшие вещи, которые могут произойти (и который очень сложно воссоздать) это проблемы с инфраструктурой. Например, ты когда нибудь тестировал поведение, когда память процесса переполняется, или процесс/сервер отключается, или мониторинг определяет, что API стал работать на 50% медленее? Чтобы проверить и эмулировать такие нехорошие вещи появился продукт Netflix - [Chaos engineering](https://principlesofchaos.org/). В него входят инструменты для тестирования устойчивости нашего приложения к хаотичным проблемам. Например, один из его самых извесных инструментов - [the chaos monkey](https://github.com/Netflix/chaosmonkey) в случайном порядке отключает сервера, чтобы убедиться, что приложение все еще способно работать и не полагается на работу лишь одного сервера, (также есть Kubernetes версия, [kube-monkey](https://github.com/asobti/kube-monkey), она отключает поды). Все эти инструменты работают на уровне хостинга/платформы, но что если ты хочешь протестировать созданный чистый Node хаос, например проверить, как твой Node процесс ведет себя при поялении необрабатываемых ошибок или promise rejection, переполнении памяти V8 с максимально разрешенными 1.7Гб или как UX поведет себя, когда event loop будет часто блокироваться? Для ответов на эти вопросы есть библиотека [node-chaos](https://github.com/i0natan/node-chaos-monkey), которая позволяет создать любой Node хаос.
 <br/>
 
-❌ **Otherwise:** No escape here, Murphy’s law will hit your production without mercy
-
-<br/>
-
-<details><summary>✏ <b>Code Examples</b></summary>
+❌ **Иначе:** Выхода нет, закон Мерфи безжалостно сработает в продакшне 
 
 <br/>
 
-### :clap: Doing It Right Example: : Node-chaos can generate all sort of Node.js pranks so you can test how resilience is your app to chaos
+<details><summary>✏️ <b>Пример кода</b></summary>
 
-![alt text](assets/bp-17-yoni-goldberg-chaos-monkey-nodejs.png "Node-chaos can generate all sort of Node.js pranks so you can test how resilience is your app to chaos")
+<br/>
+
+### 👏 Делай правильно Пример: Node-chaos может создать все виды Node.js неожиданностей, так что ты сможешь проверить устойчивость своего приложения к хаосу 
+
+![alt text](assets/bp-17-yoni-goldberg-chaos-monkey-nodejs.png "Node-chaos может создать все виды Node.js неожиданностей, так что ты сможешь проверить устойчивость своего приложения к хаосу")
 
 </details>
 
 <br/>
-
-## ⚪ ️2.7 Avoid global test fixtures and seeds, add data per-test
-
-:white_check_mark: **Do:** Going by the golden rule (bullet 0), each test should add and act on its own set of DB rows to prevent coupling and easily reason about the test flow. In reality, this is often violated by testers who seed the DB with data before running the tests (also known as ‘test fixture’) for the sake of performance improvement. While performance is indeed a valid concern — it can be mitigated (see “Component testing” bullet), however, test complexity is a much painful sorrow that should govern other considerations most of the time. Practically, make each test case explicitly add the DB records it needs and act only on those records. If performance becomes a critical concern — a balanced compromise might come in the form of seeding the only suite of tests that are not mutating data (e.g. queries)
-<br/>
-
-❌ **Otherwise:** Few tests fail, a deployment is aborted, our team is going to spend precious time now, do we have a bug? let’s investigate, oh no — it seems that two tests were mutating the same seed data
-
-<br/>
-
-<details><summary>✏ <b>Code Examples</b></summary>
-
-<br/>
-
-### :thumbsdown: Anti-Pattern Example: tests are not independent and rely on some global hook to feed global DB data
-
-![](https://img.shields.io/badge/🔧%20Example%20using%20Mocha-blue.svg "Examples with Mocha")
-
-```javascript
-before(async () => {
-  //adding sites and admins data to our DB. Where is the data? outside. At some external json or migration framework
-  await DB.AddSeedDataFromJson('seed.json');
-});
-it("When updating site name, get successful confirmation", async () => {
-  //I know that site name "portal" exists - I saw it in the seed files
-  const siteToUpdate = await SiteService.getSiteByName("Portal");
-  const updateNameResult = await SiteService.changeName(siteToUpdate, "newName");
-  expect(updateNameResult).to.be(true);
-});
-it("When querying by site name, get the right site", async () => {
-  //I know that site name "portal" exists - I saw it in the seed files
-  const siteToCheck = await SiteService.getSiteByName("Portal");
-  expect(siteToCheck.name).to.be.equal("Portal"); //Failure! The previous test change the name :[
-});
-
-```
-
-<br/>
-
-### :clap: Doing It Right Example: We can stay within the test, each test acts on its own set of data
-
-```javascript
-it("When updating site name, get successful confirmation", async () => {
-  //test is adding a fresh new records and acting on the records only
-  const siteUnderTest = await SiteService.addSite({
-    name: "siteForUpdateTest"
-  });
-  const updateNameResult = await SiteService.changeName(siteUnderTest, "newName");
-  expect(updateNameResult).to.be(true);
-});
-```
-
-</details>
-
-<br/><br/>
 
 # Section 3️⃣: Frontend Testing
 
